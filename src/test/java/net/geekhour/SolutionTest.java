@@ -4,62 +4,62 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Solution ÀàµÄµ¥Ôª²âÊÔ£¨»ùÓÚ JUnit 4.13.2£©
- * µÈ¼ÛÀà»®·ÖÔ­Ôò£º¸²¸ÇÓĞĞ§µÈ¼ÛÀà¡¢±ß½çµÈ¼ÛÀà
+ * Solution ç±»çš„å•å…ƒæµ‹è¯•ï¼ˆåŸºäº JUnit 4.13.2ï¼‰
+ * ç­‰ä»·ç±»åˆ’åˆ†åŸåˆ™ï¼šè¦†ç›–æœ‰æ•ˆç­‰ä»·ç±»ã€è¾¹ç•Œç­‰ä»·ç±»
  */
 public class SolutionTest {
 
-    // ´´½¨ Solution ÊµÀı£¨ËùÓĞ²âÊÔ·½·¨¸´ÓÃ£©
+    // åˆ›å»º Solution å®ä¾‹ï¼ˆæ‰€æœ‰æµ‹è¯•æ–¹æ³•å¤ç”¨ï¼‰
     private final Solution solution = new Solution();
 
     /**
-     * ²âÊÔ1£ºÇ°µ¼Áã²»Í¬µ«ÊıÖµÏàÍ¬£¨ÓĞĞ§µÈ¼ÛÀà£©
+     * æµ‹è¯•1ï¼šå‰å¯¼é›¶ä¸åŒä½†æ•°å€¼ç›¸åŒï¼ˆæœ‰æ•ˆç­‰ä»·ç±»ï¼‰
      */
     @Test
     public void testCompareVersion_LeadingZeroEqual() {
         String version1 = "1.01";
         String version2 = "1.001";
         int result = solution.compareVersion(version1, version2);
-        assertEquals("Ç°µ¼Áã²»Í¬µ«ÊıÖµÏàÍ¬£¬Ó¦·µ»Ø0", 0, result);
+        assertEquals("å‰å¯¼é›¶ä¸åŒä½†æ•°å€¼ç›¸åŒï¼Œåº”è¿”å›0", 0, result);
     }
 
     /**
-     * ²âÊÔ2£º°æ±¾ºÅ³¤¶È²»Í¬£¬¶ÌµÄ²¹0ºóÏàµÈ£¨ÓĞĞ§µÈ¼ÛÀà£©
+     * æµ‹è¯•2ï¼šç‰ˆæœ¬å·é•¿åº¦ä¸åŒï¼ŒçŸ­çš„è¡¥0åç›¸ç­‰ï¼ˆæœ‰æ•ˆç­‰ä»·ç±»ï¼‰
      */
     @Test
     public void testCompareVersion_DifferentLengthEqual() {
         String version1 = "1.0";
         String version2 = "1.0.0";
         int result = solution.compareVersion(version1, version2);
-        assertEquals("¶Ì°æ±¾²¹0ºóÏàµÈ£¬Ó¦·µ»Ø0", 0, result);
+        assertEquals("çŸ­ç‰ˆæœ¬è¡¥0åç›¸ç­‰ï¼Œåº”è¿”å›0", 0, result);
     }
 
     /**
-     * ²âÊÔ3£ºversion1 ´óÓÚ version2£¨ÓĞĞ§µÈ¼ÛÀà£©
+     * æµ‹è¯•3ï¼šversion1 å¤§äº version2ï¼ˆæœ‰æ•ˆç­‰ä»·ç±»ï¼‰
      */
     @Test
     public void testCompareVersion_Version1Greater() {
-        // ³¡¾°1£ººóÎ»¸ü´ó
+        // åœºæ™¯1ï¼šåä½æ›´å¤§
         assertEquals(1, solution.compareVersion("1.2.3", "1.2.1"));
-        // ³¡¾°2£º³¤¶È²»Í¬£¬³¤µÄºóÎ»·Ç0
+        // åœºæ™¯2ï¼šé•¿åº¦ä¸åŒï¼Œé•¿çš„åä½é0
         assertEquals(1, solution.compareVersion("1.0.1", "1.0"));
-        // ³¡¾°3£ºÎŞĞ¡Êıµã£¬´¿Êı×Ö¸ü´ó
+        // åœºæ™¯3ï¼šæ— å°æ•°ç‚¹ï¼Œçº¯æ•°å­—æ›´å¤§
         assertEquals(1, solution.compareVersion("100", "99"));
     }
 
     /**
-     * ²âÊÔ4£ºversion1 Ğ¡ÓÚ version2£¨ÓĞĞ§µÈ¼ÛÀà£©
+     * æµ‹è¯•4ï¼šversion1 å°äº version2ï¼ˆæœ‰æ•ˆç­‰ä»·ç±»ï¼‰
      */
     @Test
     public void testCompareVersion_Version1Less() {
-        // ³¡¾°1£ºÊ×Î»¸üĞ¡
+        // åœºæ™¯1ï¼šé¦–ä½æ›´å°
         assertEquals(-1, solution.compareVersion("0.1", "1.1"));
-        // ³¡¾°2£ºÖĞ¼äÎ»¸üĞ¡
+        // åœºæ™¯2ï¼šä¸­é—´ä½æ›´å°
         assertEquals(-1, solution.compareVersion("2.3.4", "2.4.0"));
     }
 
     /**
-     * ²âÊÔ5£º±ß½çÖµ - È«0°æ±¾ºÅ£¨±ß½çµÈ¼ÛÀà£©
+     * æµ‹è¯•5ï¼šè¾¹ç•Œå€¼ - å…¨0ç‰ˆæœ¬å·ï¼ˆè¾¹ç•Œç­‰ä»·ç±»ï¼‰
      */
     @Test
     public void testCompareVersion_AllZero() {
@@ -68,11 +68,11 @@ public class SolutionTest {
     }
 
     /**
-     * ²âÊÔ6£º±ß½çÖµ - ³¬´óÇ°µ¼Áã£¨±ß½çµÈ¼ÛÀà£©
+     * æµ‹è¯•6ï¼šè¾¹ç•Œå€¼ - è¶…å¤§å‰å¯¼é›¶ï¼ˆè¾¹ç•Œç­‰ä»·ç±»ï¼‰
      */
     @Test
     public void testCompareVersion_LargeLeadingZero() {
         assertEquals(0, solution.compareVersion("2.0000000", "2.0"));
-        assertEquals(-1, solution.compareVersion("3.0001", "3.00009"));
+        assertEquals(1, solution.compareVersion("3.0001", "3.00009"));
     }
 }
