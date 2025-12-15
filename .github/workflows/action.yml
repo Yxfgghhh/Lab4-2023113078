@@ -1,0 +1,30 @@
+
+name: tests
+on: push
+
+# 工作流任务
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 步骤1：拉取GitHub仓库代码到运行环境
+      - name: check
+        uses: actions/checkout@v4
+
+      # 步骤2：配置JDK 17
+      - name: set up
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'          # 指定JDK版本
+          distribution: 'temurin'     # 使用Eclipse Temurin JDK（稳定版）
+          cache: 'maven'              # 缓存Maven依赖，加速后续构建
+
+      # 步骤3：执行Maven测试
+      - name: run
+        run: mvn -B test --file pom.xml
+        env:
+          # 强制指定编码为UTF-8，避免中文注释编码问题
+          MAVEN_OPTS: "-Dfile.encoding=UTF-8 -Dproject.build.sourceEncoding=UTF-8"
+
+      
